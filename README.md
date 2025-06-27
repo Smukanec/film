@@ -7,7 +7,8 @@ Tento repositář obsahuje prototyp jednoduché webové aplikace pro správu kos
 - **Node.js** – pro spuštění lokálního serveru nebo případné sestavení React kódu
 - **PHP** (8+) – kvůli skriptu `upload.php`, který ukládá nahrané snímky
 
-Instalace Node.js i PHP je možná prostřednictvím oficiálních balíčků (např. `apt`, `brew` nebo instalátor z [nodejs.org](https://nodejs.org/) a [php.net](https://www.php.net/)).
+Instalace Node.js i PHP je možná prostřednictvím oficiálních balíčků (např. `apt`, `brew` nebo instalátor z [nodejs.org](https://nodejs.org/) a [php.net](https://www.php.net/)).  Po instalaci
+spusťte `npm install` pro instalaci závislostí definovaných v `package.json`.
 
 ## Spuštění aplikace
 
@@ -20,19 +21,33 @@ Instalace Node.js i PHP je možná prostřednictvím oficiálních balíčků (n
 
    Tím bude web dostupný na [http://localhost:8000](http://localhost:8000).
 
-3. (Volitelně) Pokud chcete spustit pouze statický frontend pomocí Node, lze použít např.:
+3. (Volitelně) Pro vývoj React části spusťte:
 
    ```bash
-   npx http-server
+   npm start
    ```
 
-   nebo jakýkoli jiný statický Node server.
+   a otevřete `http://localhost:5173` (výchozí port Vite). Produkční balíček
+   vytvoříte příkazem `npm run build` a výstup najdete v adresáři `dist/`.
 
 ## Kam se ukládají fotografie?
 
-Skriptem `upload.php` jsou snímky ukládány do adresáře `fotky/<tým>/`.  Výchozí tým je `Zdena`, tedy složka `fotky/Zdena`.
+Skriptem `upload.php` jsou snímky ukládány do adresáře `fotky/<tým>/`.  Tým je
+odesílán z frontendu spolu s fotkou.  Pokud není uveden, použije se `Zdena`.
+
+Základní správu týmů zajišťuje skript `team.php`, který ukládá informace do
+`data/teams.json`.  Akce se provádějí pomocí POST parametrů:
+
+```
+action=create  team=<name> leader=<licence>
+action=add     team=<name> member=<licence> license=<leaderLicence>
+action=remove  team=<name> member=<licence> license=<leaderLicence>
+```
 
 ## Použití
 
 Po spuštění serveru otevřete v prohlížeči `index.html` (nebo `public/index.html` u React verze).  Aplikace umožní zadat licenční klíč a nahrávat fotografie, které se ukládají do výše uvedené složky.  Při práci s React kódem lze využít libovolný bundler (např. Vite) – ten vyžaduje nainstalovaný Node.js.
+
+V přehledu scén lze označit jednotlivé záběry pro offline režim. Obrázky se
+poté uloží do `localStorage` a budou dostupné i bez připojení k síti.
 
