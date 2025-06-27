@@ -1,6 +1,7 @@
 
 let mode = "upload";
 let structure = JSON.parse(localStorage.getItem("structure") || "{}");
+const team = localStorage.getItem("team") || "Zdena";
 let expanded = {};
 
 let offline;
@@ -62,6 +63,7 @@ function render() {
 
       const fd = new FormData();
       fd.append("file", file, newName);
+      fd.append("team", team);
       fetch("upload.php", { method: "POST", body: fd })
         .then(res => res.text()).then(t => alert("Server: " + t));
     };
@@ -97,7 +99,7 @@ function render() {
                 files.forEach(fname => {
                   const f = document.createElement("div");
                   f.style.marginLeft = "60px";
-                  const url = `./fotky/${fname}`;
+                  const url = `./fotky/${team}/${fname}`;
                   f.innerHTML = `<img src="${url}" style="max-width:200px;"><br>${fname}`;
                   sd.appendChild(f);
                 });

@@ -1,1 +1,0 @@
-// Toto je placeholder za přeložený React kód
