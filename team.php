@@ -1,5 +1,9 @@
 <?php
-$dataFile = __DIR__ . '/data/teams.json';
+$dataDir = __DIR__ . '/data';
+if (!is_dir($dataDir)) {
+    mkdir($dataDir, 0777, true);
+}
+$dataFile = $dataDir . '/teams.json';
 if (!file_exists($dataFile)) {
     file_put_contents($dataFile, '{}');
 }
