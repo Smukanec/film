@@ -8,12 +8,13 @@ Tento repositář obsahuje prototyp jednoduché webové aplikace pro správu kos
 - **PHP** (8+) – kvůli skriptu `upload.php`, který ukládá nahrané snímky
 
 Instalace Node.js i PHP je možná prostřednictvím oficiálních balíčků (např. `apt`, `brew` nebo instalátor z [nodejs.org](https://nodejs.org/) a [php.net](https://www.php.net/)).  Po instalaci
-spusťte `npm install` pro instalaci závislostí definovaných v `package.json`.
+spusťte `./setup.sh`. Skript ověří dostupnost Node.js a npm, případně nainstaluje závislosti a připraví adresáře `data/` a `fotky/`.
 
 ## Spuštění aplikace
 
 1. Naklonujte tento repositář a přejděte do jeho kořenového adresáře.
-2. Spusťte lokální PHP server (obslouží statické soubory i `upload.php`):
+2. Spusťte `./setup.sh` pro instalaci nebo aktualizaci závislostí.
+3. Spusťte lokální PHP server (obslouží statické soubory i `upload.php`):
 
    ```bash
    php -S localhost:8000
@@ -21,7 +22,7 @@ spusťte `npm install` pro instalaci závislostí definovaných v `package.json`
 
    Tím bude web dostupný na [http://localhost:8000](http://localhost:8000).
 
-3. (Volitelně) Pro vývoj React části spusťte:
+4. (Volitelně) Pro vývoj React části spusťte:
 
    ```bash
    npm start
